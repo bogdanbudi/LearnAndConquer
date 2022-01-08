@@ -1,3 +1,4 @@
+using Cart.API.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,8 @@ namespace Cart.API
                 options.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
             }
             );
+
+            services.AddScoped<ICartRepository, CartRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
