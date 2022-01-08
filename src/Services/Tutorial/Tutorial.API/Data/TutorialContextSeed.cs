@@ -25,7 +25,7 @@ namespace Tutorial.API.Data
                 new Course()
                 {
                     Id = "602d2149e773f2a3990b47f5",
-                    Name = "Curs ASP.NET Core ",
+                    Name = "Curs ASP.NET Core",
                     PrimaryTehnology = "ASP.NET",
                     Company = "Endava",
                     InstructorName = "Budi Bogdan", 
@@ -40,7 +40,7 @@ namespace Tutorial.API.Data
                 new Course()
                 {
                     Id = "602d2149e773f2a3990b47g2",
-                    Name = "Curs Spring Boot ",
+                    Name = "Curs Spring Boot",
                     PrimaryTehnology = "Spring Boot",
                     Company = "Endava",
                     InstructorName = "Mihai Andreea",
