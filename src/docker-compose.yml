@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  tutorialdb:
+    image: mongo
+
+  tutorial.api:
+    image: ${DOCKER_REGISTRY-}tutorialapi
+    build:
+      context: .
+      dockerfile: Services\Tutorial\Tutorial.API\Dockerfile
+
+volumes:
+  mongo_data:
