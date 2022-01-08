@@ -4,11 +4,24 @@ services:
   tutorialdb:
     image: mongo
 
+  cartdb:
+    image: redis:alpine
+
+  portainer:
+    image: portainer/portainer-ce
+
   tutorial.api:
     image: ${DOCKER_REGISTRY-}tutorialapi
     build:
       context: .
       dockerfile: Services\Tutorial\Tutorial.API\Dockerfile
 
+  cart.api:
+    image: ${DOCKER_REGISTRY-}cartapi
+    build:
+      context: .
+      dockerfile: Services/Cart/Cart.API/Dockerfile
+
 volumes:
   mongo_data:
+  portainer_data:
