@@ -1,4 +1,6 @@
+using Cart.API.GrpcServices;
 using Cart.API.Repository;
+using Discount.Grpc.Protos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,10 @@ namespace Cart.API
             );
 
             services.AddScoped<ICartRepository, CartRepository>();
+
+            services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o => o.Address = new Uri(Configuration["GrpcSettings:DiscountUrl"]));
+
+            services.AddScoped<DisocuntGrpcService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
