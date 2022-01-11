@@ -1,10 +1,13 @@
 ﻿using Ordering.Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ordering.Domain.Entities
 {
     public class Order : EntityBase
     {
         public string UserName { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal TotalPrice { get; set; }
 
         // Payment
