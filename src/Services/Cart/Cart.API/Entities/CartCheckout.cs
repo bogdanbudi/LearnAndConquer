@@ -1,6 +1,6 @@
-﻿namespace EventBus.Messages.Events
+﻿namespace Cart.API.Entities
 {
-    public class CartCheckoutEvent : IntegrationBaseEvent
+    public class CartCheckout
     {
         public string UserName { get; set; }
         public decimal TotalPrice { get; set; }

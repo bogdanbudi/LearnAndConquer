@@ -39,6 +39,9 @@ namespace Cart.API
             //General Configuration
             services.AddScoped<ICartRepository, CartRepository>();
 
+            //provide reflection
+            services.AddAutoMapper(typeof(Startup));
+
             //Grpc Configuration
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o => o.Address = new Uri(Configuration["GrpcSettings:DiscountUrl"]));
 
