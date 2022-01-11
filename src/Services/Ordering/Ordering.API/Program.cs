@@ -7,6 +7,9 @@ namespace Ordering.API
     {
         public static void Main(string[] args)
         {
+            var host = CreateHostBuilder(args).Build().Run();
+            host.MigrateDatabase<Program>();
+            host.Run();
             CreateHostBuilder(args).Build().Run();
         }
 
