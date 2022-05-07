@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31112.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{909DCC66-CBF4-4DF5-B0F3-1A0492D8B2A3}"
 EndProject
@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "Buildi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{DAB92738-20B7-4B26-AE03-DBD89751996A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGw", "ApiGateways\OcelotApiGw\OcelotApiGw.csproj", "{26A9622D-F602-4BF3-A5DB-1329148DAAC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "ApiGateways\OcelotApiGw\OcelotApiGw.csproj", "{26A9622D-F602-4BF3-A5DB-1329148DAAC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Aggregator", "ApiGateways\Shopping.Aggregator\Shopping.Aggregator.csproj", "{6EA8B43F-87E1-4427-910C-36438369E309}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{26A9622D-F602-4BF3-A5DB-1329148DAAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26A9622D-F602-4BF3-A5DB-1329148DAAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26A9622D-F602-4BF3-A5DB-1329148DAAC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EA8B43F-87E1-4427-910C-36438369E309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA8B43F-87E1-4427-910C-36438369E309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA8B43F-87E1-4427-910C-36438369E309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA8B43F-87E1-4427-910C-36438369E309}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{55CEA4CD-D217-423B-9FFB-D89700EDAA2E} = {7C994BD4-56A1-4F67-AD4D-729CF29E4FEB}
 		{1CF445CF-38E4-49F6-B7A9-06B13D59D8D3} = {73EEA892-923E-4327-82D0-A636B6E300C8}
 		{26A9622D-F602-4BF3-A5DB-1329148DAAC0} = {DAB92738-20B7-4B26-AE03-DBD89751996A}
+		{6EA8B43F-87E1-4427-910C-36438369E309} = {DAB92738-20B7-4B26-AE03-DBD89751996A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9BAF3C6E-7A58-46AC-8FF7-CFD52AC03251}
