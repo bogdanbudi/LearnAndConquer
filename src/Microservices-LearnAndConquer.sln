@@ -41,11 +41,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "ApiGateways\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.Aggregator", "ApiGateways\Shopping.Aggregator\Shopping.Aggregator.csproj", "{6EA8B43F-87E1-4427-910C-36438369E309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.Domain", "Tutorial\Tutorial.Domain\Tutorial.Domain.csproj", "{9EB3521A-63FF-492D-B3CB-0B7156CC1BDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tutorial.Domain", "Tutorial\Tutorial.Domain\Tutorial.Domain.csproj", "{9EB3521A-63FF-492D-B3CB-0B7156CC1BDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.Application", "Tutorial\Tutorial.Application\Tutorial.Application.csproj", "{AE1F8CE1-5421-482E-9EA7-3B64F8486466}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tutorial.Application", "Tutorial\Tutorial.Application\Tutorial.Application.csproj", "{AE1F8CE1-5421-482E-9EA7-3B64F8486466}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.Infrastructure", "Tutorial\Tutorial.Infrastructure\Tutorial.Infrastructure.csproj", "{F26B52BB-D689-4D56-81BE-A503FD4A334A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tutorial.Infrastructure", "Tutorial\Tutorial.Infrastructure\Tutorial.Infrastructure.csproj", "{F26B52BB-D689-4D56-81BE-A503FD4A334A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

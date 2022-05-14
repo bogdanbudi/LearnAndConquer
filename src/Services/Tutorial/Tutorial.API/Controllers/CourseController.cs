@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Tutorial.API.Core.Spe;
 using Tutorial.API.Entities;
 using Tutorial.API.Repository;
 
@@ -78,5 +79,33 @@ namespace Tutorial.API.Controllers
         {
             return Ok(await _repository.DeleteCourse(id));
         }
+
+
+        [HttpGet("GetCoursesWithCompanyAndTehnology")]
+        [ProducesResponseType(typeof(IEnumerable<Course>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<Course>>> GetCoursesWithCompanyAndTehnology()
+        {
+            var spec = new CoursesWithCompanyAndTehnologySpecification();
+
+            var courses = await _repository.GetEntitiesWithSpec(spec);
+            return Ok(courses);
+        }
+
+        [HttpGet("{id:length(24)}", Name = "GetCourse")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Course), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Course>> GetCourseByIdWithSpec(string id)
+        {
+            var spec = new CoursesWithCompanyAndTehnologySpecification(id);
+
+            var course = await _repository.GetEntityWithSpec(spec);
+            if (course == null)
+            {
+                _logger.LogError($"Course with id: {id}, not found.");
+                return NotFound();
+            }
+            return Ok(course);
+        }
+
     }
 }

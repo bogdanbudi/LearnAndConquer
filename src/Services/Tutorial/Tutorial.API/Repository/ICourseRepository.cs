@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Tutorial.API.Core.Spe;
 using Tutorial.API.Entities;
 
 namespace Tutorial.API.Repository
@@ -14,5 +15,11 @@ namespace Tutorial.API.Repository
         Task CreateCourse(Course course);
         Task<bool> UpdateCourse(Course course);
         Task<bool> DeleteCourse(string id);
+
+        //using Specs
+
+        Task<Course> GetEntityWithSpec(ISpecification<Course> spec);
+
+        Task<IEnumerable<Course>> GetEntitiesWithSpec(ISpecification<Course> spec);
     }
 }

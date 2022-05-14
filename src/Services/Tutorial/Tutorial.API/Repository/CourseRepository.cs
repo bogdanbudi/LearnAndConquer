@@ -1,10 +1,13 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tutorial.API.Core.Spe;
 using Tutorial.API.Data;
 using Tutorial.API.Entities;
+using Tutorial.API.Infra.Data.SpecEva;
 
 namespace Tutorial.API.Repository
 {
@@ -77,6 +80,23 @@ namespace Tutorial.API.Repository
 
             return deleteResult.IsAcknowledged
                 && deleteResult.DeletedCount > 0;
+        }
+
+        //With Specifications
+        public async Task<Course> GetEntityWithSpec(ISpecification<Course> spec)
+        {
+            return await ApplySpecification(spec).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Course>> GetEntitiesWithSpec(ISpecification<Course> spec)
+        {
+            return await ApplySpecification(spec).ToListAsync();
+        }
+
+        private IQueryable<Course> ApplySpecification(ISpecification<Course> spec)
+        {
+            //_context.Set<T>.AsQueryable....
+            return SpecificationEvaluator<Course>.GetQuery(_context.Courses.AsQueryable(), spec); 
         }
     }
 }
