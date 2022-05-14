@@ -12,5 +12,7 @@ namespace Tutorial.API.Core.Spe
 
         Expression<Func<T, object>> OrderBy { get; }
         Expression<Func<T, object>> OrderByDescending { get; }
+
+
     }
 }

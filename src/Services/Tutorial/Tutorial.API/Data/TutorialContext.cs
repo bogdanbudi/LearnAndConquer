@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using Tutorial.API.Entities;
 
@@ -16,6 +17,7 @@ namespace Tutorial.API.Data
 
         }
         public IMongoCollection<Course> Courses { get; }
+        public DbSet<Course> CoursesDbSet { get; set; }
     }
 
 }

@@ -88,15 +88,19 @@ namespace Tutorial.API.Repository
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Course>> GetEntitiesWithSpec(ISpecification<Course> spec)
+        public async Task<IReadOnlyList<Course>> GetEntitiesWithSpec(ISpecification<Course> spec)
         {
-            return await ApplySpecification(spec).ToListAsync();
+
+
+            var returnA = await ApplySpecification(spec).ToListAsync();
+            return returnA;
         }
 
         private IQueryable<Course> ApplySpecification(ISpecification<Course> spec)
         {
             //_context.Set<T>.AsQueryable....
-            return SpecificationEvaluator<Course>.GetQuery(_context.Courses.AsQueryable(), spec); 
+           // return SpecificationEvaluator<Course>.GetQuery(_context.Courses.AsQueryable(), spec);
+            return SpecificationEvaluator<Course>.GetQuery(_context.CoursesDbSet.AsQueryable(), spec);
         }
     }
 }

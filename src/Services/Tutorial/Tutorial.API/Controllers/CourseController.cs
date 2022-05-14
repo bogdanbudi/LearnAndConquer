@@ -82,29 +82,13 @@ namespace Tutorial.API.Controllers
 
 
         [HttpGet("GetCoursesWithCompanyAndTehnology")]
-        [ProducesResponseType(typeof(IEnumerable<Course>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCoursesWithCompanyAndTehnology()
+        [ProducesResponseType(typeof(List<Course>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<Course>>> GetCoursesWithCompanyAndTehnology(string sort)
         {
-            var spec = new CoursesWithCompanyAndTehnologySpecification();
+            var spec = new CoursesWithCompanyAndTehnologySpecification(sort);
 
             var courses = await _repository.GetEntitiesWithSpec(spec);
             return Ok(courses);
-        }
-
-        [HttpGet("{id:length(24)}", Name = "GetCourse")]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(Course), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Course>> GetCourseByIdWithSpec(string id)
-        {
-            var spec = new CoursesWithCompanyAndTehnologySpecification(id);
-
-            var course = await _repository.GetEntityWithSpec(spec);
-            if (course == null)
-            {
-                _logger.LogError($"Course with id: {id}, not found.");
-                return NotFound();
-            }
-            return Ok(course);
         }
 
     }

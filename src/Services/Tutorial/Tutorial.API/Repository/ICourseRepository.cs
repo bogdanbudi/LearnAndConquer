@@ -20,6 +20,6 @@ namespace Tutorial.API.Repository
 
         Task<Course> GetEntityWithSpec(ISpecification<Course> spec);
 
-        Task<IEnumerable<Course>> GetEntitiesWithSpec(ISpecification<Course> spec);
+        Task<IReadOnlyList<Course>> GetEntitiesWithSpec(ISpecification<Course> spec);
     }
 }
