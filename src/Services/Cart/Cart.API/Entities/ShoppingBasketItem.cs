@@ -7,7 +7,5 @@
         public string NameCourse { get; set; }
         public decimal Price { get; set; }
 
-
-
     }
 }

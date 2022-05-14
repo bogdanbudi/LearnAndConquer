@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +13,7 @@ namespace Tutorial.API.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [EnableCors("CoursesPolicy")]
     public class CourseController : ControllerBase
     {
         private readonly ICourseRepository _repository;

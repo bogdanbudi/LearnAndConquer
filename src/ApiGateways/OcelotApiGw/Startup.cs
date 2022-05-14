@@ -16,6 +16,14 @@ namespace OcelotApiGw
         {
             services.AddOcelot()
                 .AddCacheManager(settings => settings.WithDictionaryHandle());
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("ElearningPolicy", policy =>
+                {
+                    //policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -27,6 +35,10 @@ namespace OcelotApiGw
             }
 
             app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseCors("ElearningPolicy");
 
             app.UseEndpoints(endpoints =>
             {

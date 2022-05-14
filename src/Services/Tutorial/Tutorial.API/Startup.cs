@@ -36,6 +36,15 @@ namespace Tutorial.API
 
             services.AddScoped<ITutorialContext, TutorialContext>();
             services.AddScoped<ICourseRepository, CourseRepository>();
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("ElearningPolicy", policy =>
+                {
+                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                    //policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,10 +61,13 @@ namespace Tutorial.API
 
             app.UseAuthorization();
 
+            app.UseCors("ElearningPolicy");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
