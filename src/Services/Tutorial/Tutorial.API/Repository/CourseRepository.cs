@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Tutorial.API.Core.Spe;
 using Tutorial.API.Data;
 using Tutorial.API.Entities;
+using Tutorial.API.Extensions;
+using Tutorial.API.Helper;
 using Tutorial.API.Infra.Data.SpecEva;
 
 namespace Tutorial.API.Repository
@@ -83,24 +85,49 @@ namespace Tutorial.API.Repository
         }
 
         //With Specifications
-        public async Task<Course> GetEntityWithSpec(ISpecification<Course> spec)
+        //public async Task<Course> GetEntityWithSpec(ISpecification<Course> spec)
+        //{
+        //    return await ApplySpecification(spec).FirstOrDefaultAsync();
+        //}
+
+        //public async Task<IReadOnlyList<Course>> GetEntitiesWithSpec(ISpecification<Course> spec)
+        //{
+
+
+        //    var returnA = await ApplySpecification(spec).ToListAsync();
+        //    return returnA;
+        //}
+
+        //private IQueryable<Course> ApplySpecification(ISpecification<Course> spec)
+        //{
+        //    //_context.Set<T>.AsQueryable....
+        //   // return SpecificationEvaluator<Course>.GetQuery(_context.Courses.AsQueryable(), spec);
+        //    return SpecificationEvaluator<Course>.GetQuery(_context.CoursesDbSet.AsQueryable(), spec);
+        //}
+
+
+
+        //With PagingExtensions
+
+        //public async Task<IEnumerable<Course>> GetCoursesPaging(int pageSize, int pageNumber)
+        //{
+        //    var courses = await _context
+        //                    .Courses
+        //                    .Find(p => true)                          
+        //                    .ToListAsync();
+
+        //    return PagingExtensions.Page(courses, pageNumber, pageSize);
+        //}
+
+        public async Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber)
         {
-            return await ApplySpecification(spec).FirstOrDefaultAsync();
+            var courses = await _context
+                            .Courses
+                            .Find(p => true)
+                            .ToListAsync();
+
+            return PagingExtensions.PaginationCourse(courses, pageNumber, pageSize);
         }
-
-        public async Task<IReadOnlyList<Course>> GetEntitiesWithSpec(ISpecification<Course> spec)
-        {
-
-
-            var returnA = await ApplySpecification(spec).ToListAsync();
-            return returnA;
-        }
-
-        private IQueryable<Course> ApplySpecification(ISpecification<Course> spec)
-        {
-            //_context.Set<T>.AsQueryable....
-           // return SpecificationEvaluator<Course>.GetQuery(_context.Courses.AsQueryable(), spec);
-            return SpecificationEvaluator<Course>.GetQuery(_context.CoursesDbSet.AsQueryable(), spec);
-        }
+        
     }
 }

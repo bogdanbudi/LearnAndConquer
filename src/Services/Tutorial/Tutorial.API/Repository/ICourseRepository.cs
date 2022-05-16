@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Tutorial.API.Core.Spe;
 using Tutorial.API.Entities;
+using Tutorial.API.Helper;
 
 namespace Tutorial.API.Repository
 {
@@ -18,8 +19,13 @@ namespace Tutorial.API.Repository
 
         //using Specs
 
-        Task<Course> GetEntityWithSpec(ISpecification<Course> spec);
+        //Task<Course> GetEntityWithSpec(ISpecification<Course> spec);
 
-        Task<IReadOnlyList<Course>> GetEntitiesWithSpec(ISpecification<Course> spec);
+        //Task<IReadOnlyList<Course>> GetEntitiesWithSpec(ISpecification<Course> spec);
+
+        //Pagining
+        // Task<IEnumerable<Course>> GetCoursesPaging(int pageSize, int pageNumber);
+
+        Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber);
     }
 }
