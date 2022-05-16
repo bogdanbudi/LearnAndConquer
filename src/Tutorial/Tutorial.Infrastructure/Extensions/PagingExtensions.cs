@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Tutorial.API.Entities;
-using Tutorial.API.Helper;
+using Tutorial.Domain.Entities;
+using Tutorial.Infrastructure.Helper;
 
-namespace Tutorial.API.Extensions
+namespace Tutorial.Infrastructure.Extensions
 {
     public static class PagingExtensions
     {

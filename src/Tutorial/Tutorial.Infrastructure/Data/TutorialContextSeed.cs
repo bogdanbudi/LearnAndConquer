@@ -1,9 +1,9 @@
 ﻿using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
-using Tutorial.API.Entities;
+using Tutorial.Domain.Entities;
 
-namespace Tutorial.API.Data
+namespace Tutorial.Infrastructure.Data
 {
     public class TutorialContextSeed
     {

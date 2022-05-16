@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tutorial.API.Helper
+namespace Tutorial.Infrastructure.Helper
 {
     public class Pagination<T> where T : class
     {

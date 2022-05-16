@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Tutorial.API.Entities;
-using Tutorial.API.Helper;
-using Tutorial.API.Repository;
+using Tutorial.Domain.Entities;
+using Tutorial.Infrastructure.Helper;
+using Tutorial.Infrastructure.Repository;
 
 namespace Tutorial.API.Controllers
 {
@@ -89,7 +89,23 @@ namespace Tutorial.API.Controllers
             return Ok(courses);
         }
 
-        
+        [HttpGet("GetCategories")]
+        [ProducesResponseType(typeof(List<string>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<string>>> GetCategories()
+        {
+            var categories = await _repository.GetCategories();
+            return Ok(categories);
+        }
+
+        [HttpGet("GetTehnologies")]
+        [ProducesResponseType(typeof(Pagination<Course>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Pagination<Course>>> GetTehnologies()
+        {
+            var tehnologies = await _repository.GetTehnologies();
+            return Ok(tehnologies);
+        }
+
+
 
     }
 }

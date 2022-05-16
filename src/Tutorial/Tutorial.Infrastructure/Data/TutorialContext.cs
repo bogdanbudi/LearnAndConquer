@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using Tutorial.API.Entities;
+using Tutorial.Domain.Entities;
 
-namespace Tutorial.API.Data
+namespace Tutorial.Infrastructure.Data
 {
     public class TutorialContext: ITutorialContext
     {
@@ -17,7 +16,6 @@ namespace Tutorial.API.Data
 
         }
         public IMongoCollection<Course> Courses { get; }
-        public DbSet<Course> CoursesDbSet { get; set; }
     }
 
 }

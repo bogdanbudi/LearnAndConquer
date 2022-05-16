@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tutorial.API.Data;
-using Tutorial.API.Entities;
-using Tutorial.API.Extensions;
-using Tutorial.API.Helper;
+using Tutorial.Infrastructure.Data;
+using Tutorial.Domain.Entities;
+using Tutorial.Infrastructure.Extensions;
+using Tutorial.Infrastructure.Helper;
+using System.Linq;
 
-namespace Tutorial.API.Repository
+namespace Tutorial.Infrastructure.Repository
 {
     public class CourseRepository : ICourseRepository
     {
@@ -90,6 +90,20 @@ namespace Tutorial.API.Repository
 
             return PagingExtensions.PaginationCourse(courses, pageNumber, pageSize);
         }
-        
+
+        public async Task<List<string>> GetCategories()
+        {
+            var courses = await GetCourses();
+
+            return  courses.Select(c => c.Category).Distinct().ToList();
+        }
+
+        public async Task<List<string>> GetTehnologies()
+        {
+            var courses = await GetCourses();
+
+            return courses.Select(c => c.PrimaryTehnology).Distinct().ToList();
+        }
+
     }
 }

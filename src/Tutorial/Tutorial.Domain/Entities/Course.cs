@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Tutorial.API.Entities
+namespace Tutorial.Domain.Entities
 {
     public class Course
     {

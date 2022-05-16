@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tutorial.API.Entities;
-using Tutorial.API.Helper;
+using Tutorial.Domain.Entities;
+using Tutorial.Infrastructure.Helper;
 
-namespace Tutorial.API.Repository
+namespace Tutorial.Infrastructure.Repository
 {
     public interface ICourseRepository
     {
@@ -15,16 +15,11 @@ namespace Tutorial.API.Repository
         Task CreateCourse(Course course);
         Task<bool> UpdateCourse(Course course);
         Task<bool> DeleteCourse(string id);
-
-        //using Specs
-
-        //Task<Course> GetEntityWithSpec(ISpecification<Course> spec);
-
-        //Task<IReadOnlyList<Course>> GetEntitiesWithSpec(ISpecification<Course> spec);
-
-        //Pagining
-        // Task<IEnumerable<Course>> GetCoursesPaging(int pageSize, int pageNumber);
-
         Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber);
+
+        Task<List<string>> GetCategories();
+
+        Task<List<string>> GetTehnologies();
+
     }
 }
