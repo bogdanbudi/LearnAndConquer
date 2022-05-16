@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Tutorial.API.Core.Spe;
 using Tutorial.API.Entities;
 using Tutorial.API.Helper;
 using Tutorial.API.Repository;
@@ -81,16 +80,6 @@ namespace Tutorial.API.Controllers
             return Ok(await _repository.DeleteCourse(id));
         }
 
-
-        //[HttpGet("GetCoursesWithCompanyAndTehnology")]
-        //[ProducesResponseType(typeof(List<Course>), (int)HttpStatusCode.OK)]
-        //public async Task<ActionResult<List<Course>>> GetCoursesWithCompanyAndTehnology(string sort)
-        //{
-        //    var spec = new CoursesWithCompanyAndTehnologySpecification(sort);
-
-        //    var courses = await _repository.GetEntitiesWithSpec(spec);
-        //    return Ok(courses);
-        //}
 
         [HttpGet("GetCoursesPagination")]
         [ProducesResponseType(typeof(Pagination<Course>), (int)HttpStatusCode.OK)]
