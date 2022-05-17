@@ -7,6 +7,7 @@ using Tutorial.Domain.Entities;
 using Tutorial.Infrastructure.Extensions;
 using Tutorial.Infrastructure.Helper;
 using System.Linq;
+using Tutorial.Domain.Dtos;
 
 namespace Tutorial.Infrastructure.Repository
 {
@@ -81,28 +82,76 @@ namespace Tutorial.Infrastructure.Repository
                 && deleteResult.DeletedCount > 0;
         }
 
-        public async Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber)
+        public async Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName)
         {
+
             var courses = await _context
                             .Courses
                             .Find(p => true)
                             .ToListAsync();
 
-            return PagingExtensions.PaginationCourse(courses, pageNumber, pageSize);
+            IEnumerable<Course> filteredCourses = courses;
+
+            if (!String.IsNullOrWhiteSpace(category) && category != "All")
+                filteredCourses = filteredCourses.Where(course => course.Category == category);
+
+            if (!String.IsNullOrWhiteSpace(primaryTehnology) && primaryTehnology != "All")
+                filteredCourses = filteredCourses.Where(course => course.PrimaryTehnology == primaryTehnology);
+
+            if (!String.IsNullOrWhiteSpace(companyName) && companyName != "All")
+                filteredCourses = filteredCourses.Where(course => course.Company == companyName);
+
+            
+
+            return PagingExtensions.PaginationCourse(filteredCourses.ToList(), pageNumber, pageSize);
         }
 
-        public async Task<List<string>> GetCategories()
+        public async Task<List<GetCategoriesDto>> GetCategories()
         {
             var courses = await GetCourses();
+            var categories = courses.Select(c => c.Category).Distinct().ToList();
 
-            return  courses.Select(c => c.Category).Distinct().ToList();
+            var categoriesDto = new List<GetCategoriesDto>();
+
+            int i = 0;
+            foreach (var category in categories)
+            {
+                categoriesDto.Add(new GetCategoriesDto() { Id = ++i, Name = category });
+            }
+
+            return categoriesDto;
         }
 
-        public async Task<List<string>> GetTehnologies()
+        public async Task<List<GetTehnologiesDto>> GetTehnologies()
         {
             var courses = await GetCourses();
+            var tehnologies = courses.Select(c => c.PrimaryTehnology).Distinct().ToList();
 
-            return courses.Select(c => c.PrimaryTehnology).Distinct().ToList();
+            var tehnologiesDto = new List<GetTehnologiesDto>();
+
+            int i = 0;
+            foreach (var tehnology in tehnologies)
+            {
+                tehnologiesDto.Add(new GetTehnologiesDto() { Id = ++i, Name = tehnology });
+            }
+
+            return tehnologiesDto;
+        }
+
+        public async Task<List<GetCompaniesDto>> GetCompanies()
+        {
+            var courses = await GetCourses();
+            var companies = courses.Select(c => c.Company).Distinct().ToList();
+
+            var companiesDto = new List<GetCompaniesDto>();
+
+            int i = 0;
+            foreach (var company in companies)
+            {
+                companiesDto.Add(new GetCompaniesDto() { Id = ++i, Name = company });
+            }
+
+            return companiesDto;
         }
 
     }

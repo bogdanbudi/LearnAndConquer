@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Tutorial.Domain.Dtos;
 using Tutorial.Domain.Entities;
 using Tutorial.Infrastructure.Helper;
 using Tutorial.Infrastructure.Repository;
@@ -83,29 +84,34 @@ namespace Tutorial.API.Controllers
 
         [HttpGet("GetCoursesPagination")]
         [ProducesResponseType(typeof(Pagination<Course>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Pagination<Course>>> GetCoursesPagination(int pageSize = 2, int pageNumber = 1)
+        public async Task<ActionResult<Pagination<Course>>> GetCoursesPagination(int pageSize = 2, int pageNumber = 1, string category="", string primaryTehnology="", string companyName="")
         {
-            var courses = await _repository.GetCoursesPagination(pageSize, pageNumber);
+            var courses = await _repository.GetCoursesPagination(pageSize, pageNumber, category, primaryTehnology, companyName);
             return Ok(courses);
         }
 
         [HttpGet("GetCategories")]
-        [ProducesResponseType(typeof(List<string>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<List<string>>> GetCategories()
+        [ProducesResponseType(typeof(List<GetCategoriesDto>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetCategoriesDto>>> GetCategories()
         {
             var categories = await _repository.GetCategories();
             return Ok(categories);
         }
 
         [HttpGet("GetTehnologies")]
-        [ProducesResponseType(typeof(Pagination<Course>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Pagination<Course>>> GetTehnologies()
+        [ProducesResponseType(typeof(List<GetTehnologiesDto>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetTehnologiesDto>>> GetTehnologies()
         {
             var tehnologies = await _repository.GetTehnologies();
             return Ok(tehnologies);
         }
 
-
-
+        [HttpGet("GetCompanies")]
+        [ProducesResponseType(typeof(List<GetCompaniesDto>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetCompaniesDto>>> GetCompanies()
+        {
+            var companies = await _repository.GetCompanies();
+            return Ok(companies);
+        }
     }
 }

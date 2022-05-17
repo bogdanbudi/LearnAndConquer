@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Tutorial.Domain.Dtos;
 using Tutorial.Domain.Entities;
 using Tutorial.Infrastructure.Helper;
 
@@ -15,11 +16,13 @@ namespace Tutorial.Infrastructure.Repository
         Task CreateCourse(Course course);
         Task<bool> UpdateCourse(Course course);
         Task<bool> DeleteCourse(string id);
-        Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber);
+        Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName);
 
-        Task<List<string>> GetCategories();
+        Task<List<GetCategoriesDto>> GetCategories();
 
-        Task<List<string>> GetTehnologies();
+        Task<List<GetTehnologiesDto>> GetTehnologies();
+
+        Task<List<GetCompaniesDto>> GetCompanies();
 
     }
 }
