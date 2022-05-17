@@ -82,7 +82,7 @@ namespace Tutorial.Infrastructure.Repository
                 && deleteResult.DeletedCount > 0;
         }
 
-        public async Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName)
+        public async Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName, string sort)
         {
 
             var courses = await _context
@@ -92,6 +92,7 @@ namespace Tutorial.Infrastructure.Repository
 
             IEnumerable<Course> filteredCourses = courses;
 
+            //add filters
             if (!String.IsNullOrWhiteSpace(category) && category != "All")
                 filteredCourses = filteredCourses.Where(course => course.Category == category);
 
@@ -101,9 +102,26 @@ namespace Tutorial.Infrastructure.Repository
             if (!String.IsNullOrWhiteSpace(companyName) && companyName != "All")
                 filteredCourses = filteredCourses.Where(course => course.Company == companyName);
 
-            
 
-            return PagingExtensions.PaginationCourse(filteredCourses.ToList(), pageNumber, pageSize);
+            IEnumerable<Course> resultFilteredCoures = new List<Course>();
+
+            //add sort
+            if (String.IsNullOrWhiteSpace(sort) || sort == "name")
+            {
+                resultFilteredCoures = filteredCourses.ToList().OrderBy(course => course.Name);
+            }
+            else if(sort == "priceAsc")
+            {
+                resultFilteredCoures = filteredCourses.ToList().OrderBy(course => course.Price);
+            }
+            else if (sort == "priceDesc")
+            {
+                resultFilteredCoures = filteredCourses.ToList().OrderByDescending(course => course.Price);
+            }
+
+
+
+            return PagingExtensions.PaginationCourse(resultFilteredCoures, pageNumber, pageSize);
         }
 
         public async Task<List<GetCategoriesDto>> GetCategories()
