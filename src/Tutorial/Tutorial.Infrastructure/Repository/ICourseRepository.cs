@@ -16,7 +16,7 @@ namespace Tutorial.Infrastructure.Repository
         Task CreateCourse(Course course);
         Task<bool> UpdateCourse(Course course);
         Task<bool> DeleteCourse(string id);
-        Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName, string sort);
+        Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName, string sort, string search);
 
         Task<List<GetCategoriesDto>> GetCategories();
 

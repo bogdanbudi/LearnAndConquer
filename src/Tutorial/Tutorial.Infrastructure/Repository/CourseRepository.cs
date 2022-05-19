@@ -82,7 +82,7 @@ namespace Tutorial.Infrastructure.Repository
                 && deleteResult.DeletedCount > 0;
         }
 
-        public async Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName, string sort)
+        public async Task<Pagination<Course>> GetCoursesPagination(int pageSize, int pageNumber, string category, string primaryTehnology, string companyName, string sort, string search)
         {
 
             var courses = await _context
@@ -101,6 +101,9 @@ namespace Tutorial.Infrastructure.Repository
 
             if (!String.IsNullOrWhiteSpace(companyName) && companyName != "All")
                 filteredCourses = filteredCourses.Where(course => course.Company == companyName);
+
+            if (!String.IsNullOrWhiteSpace(search))
+                filteredCourses = filteredCourses.Where(course => course.Name.Contains(search) ||  course.InstructorName.Contains(search));
 
 
             IEnumerable<Course> resultFilteredCoures = new List<Course>();
