@@ -8,5 +8,7 @@ namespace Cart.API.Repository
         Task<ShoppingBasket> GetCart(string userName);
         Task<ShoppingBasket> UpdateCart(ShoppingBasket cart);
         Task DeleteCart(string userName);
+        Task<bool> RemoveCourse(string userName, string idCourse);
+        Task<ShoppingBasket> AddCourseInCart(string userName, ShoppingBasketItem itemToAdd);
     }
 }

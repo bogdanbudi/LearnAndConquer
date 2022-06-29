@@ -1,8 +1,8 @@
 ﻿using Cart.API.Entities;
 using Microsoft.Extensions.Caching.Distributed;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +37,32 @@ namespace Cart.API.Repository
         public async Task DeleteCart(string userName)
         {
             await _redisCache.RemoveAsync(userName);
+        }
+
+        public async Task<ShoppingBasket> AddCourseInCart(string userName, ShoppingBasketItem itemToAdd)
+        {
+            var cart = await GetCart(userName);
+            cart.ShoppingItems.Add(itemToAdd);
+            return await UpdateCart(cart);
+
+        }
+
+        public async Task<bool> RemoveCourse(string userName, string idCourse)
+        {
+            var cart = await GetCart(userName);
+
+            var item = cart.ShoppingItems.SingleOrDefault(x => x.IdCourse == idCourse);
+            if (item != null)
+            {
+                cart.ShoppingItems.Remove(item);
+                await _redisCache.SetStringAsync(cart.UserName, JsonConvert.SerializeObject(cart));
+                return true;
+            }
+
+            return false;
+
+            //FilterDefinition<ShoppingBasket> filter = Builders<ShoppingBasket>.Filter.Exists(p => p.ShoppingItems.SingleOrDefault(x => x.IdCourse == idCourse));
+
         }
     }
 }

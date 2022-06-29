@@ -53,15 +53,6 @@ namespace Cart.API.Controllers
             return Ok(await _repository.UpdateCart(cart));
         }
 
-        [HttpDelete("{userName}", Name = "DeleteCart")]
-        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> DeleteCart(string userName)
-        {
-            await _repository.DeleteCart(userName);
-            return Ok();
-        }
-
-
         [Route("[action]")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Accepted)]
@@ -90,5 +81,42 @@ namespace Cart.API.Controllers
 
             return Accepted();
         }
+
+        [HttpDelete("{userName}", Name = "DeleteCart")]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteCart(string userName)
+        {
+            await _repository.DeleteCart(userName);
+            return Ok();
+        }
+
+        [HttpGet("GetCartCount/{userName}", Name = "GetCartCount")]
+        [ProducesResponseType(typeof(ShoppingBasket), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> GetCartCount(string userName)
+        {
+            var cart = await _repository.GetCart(userName);
+            return Ok(cart.ShoppingItems.Count);
+        }
+
+        [HttpDelete("RemoveCourseFromCart/{userName}/{idCourse}", Name = "RemoveCourseFromCart")]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> RemoveCourseFromCart(string userName, string idCourse)
+        {
+            var response = await _repository.RemoveCourse(userName, idCourse);
+            return Ok(response);
+        }
+
+
+        [Route("AddCourseToCart/{userName}", Name = "AddCourseToCart")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.Accepted)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ShoppingBasket), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ShoppingBasket>> AddCourseToCart(string userName, [FromBody] ShoppingBasketItem itemToAdd)
+        {
+            return Ok(await _repository.AddCourseInCart(userName, itemToAdd));
+        }
+
+
     }
 }
