@@ -84,7 +84,7 @@ namespace Tutorial.API.Controllers
 
         [HttpGet("GetCoursesPagination")]
         [ProducesResponseType(typeof(Pagination<Course>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Pagination<Course>>> GetCoursesPagination(int pageSize = 2, int pageNumber = 1, string category="", string primaryTehnology="", string companyName="", string sort="name", string search ="")
+        public async Task<ActionResult<Pagination<Course>>> GetCoursesPagination(int pageSize = 6, int pageNumber = 1, string category="", string primaryTehnology="", string companyName="", string sort="name", string search ="")
         {
             var courses = await _repository.GetCoursesPagination(pageSize, pageNumber, category, primaryTehnology, companyName, sort, search);
             return Ok(courses);
