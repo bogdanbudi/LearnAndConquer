@@ -84,6 +84,7 @@ services:
     depends_on:
       - cartdb
       - rabbitmq
+      - identityserver
     ports:
       - "8001:80"
 
@@ -131,6 +132,7 @@ services:
         - cart.api
         - discount.api
         - ordering.api
+        - identityserver
     ports:
         - "8010:80"
 
@@ -149,3 +151,15 @@ services:
     ports:
       - "8011:80"
 
+
+  identityserver:
+    container_name: identityserver
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:443;http://+:80
+      #- ASPNETCORE_URLS=http://+:80
+    ports:
+      - "8027:80"
+      - "44349:443"
+    #volumes:
+    #  - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https:ro

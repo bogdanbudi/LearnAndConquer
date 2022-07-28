@@ -4,15 +4,18 @@ using Cart.API.GrpcServices;
 using Cart.API.Repository;
 using EventBus.Messages.Events;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Cart.API.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+   // [Authorize("ClientIdPolicy")]
     public class CartController : ControllerBase
     {
         private readonly ICartRepository _repository;
@@ -116,6 +119,12 @@ namespace Cart.API.Controllers
         {
             return Ok(await _repository.AddCourseInCart(userName, itemToAdd));
         }
+
+        //[HttpGet("{getClaim}", Name = "GetClaim")]
+        //public IActionResult Get()
+        //{
+        //    return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
+        //}
 
 
     }

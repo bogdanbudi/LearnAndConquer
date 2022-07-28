@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Cache.CacheManager;
+using Microsoft.IdentityModel.Tokens;
 
 namespace OcelotApiGw
 {
@@ -24,6 +25,20 @@ namespace OcelotApiGw
                     policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
+
+            var authenticationProviderKey = "IdentityApiKey";
+
+            // NUGET - Microsoft.AspNetCore.Authentication.JwtBearer
+            services.AddAuthentication()
+             .AddJwtBearer(authenticationProviderKey, x =>
+             {
+                 x.Authority = "http://localhost:8027"; // IDENTITY SERVER URL
+                 x.RequireHttpsMetadata = false;
+                 x.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateAudience = false
+                 };
+             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +51,8 @@ namespace OcelotApiGw
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseCors("ElearningPolicy");
 

@@ -20,7 +20,8 @@ namespace OcelotApiGw
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                  {
-                     config.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json",true,true);
+                     //true reloadOnChange
+                     config.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json",true,false);
                  })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
@@ -28,9 +29,13 @@ namespace OcelotApiGw
                 })
                 .ConfigureLogging((hostingContext, logginbuilder) =>
                 {
+                    logginbuilder.ClearProviders();
+                    logginbuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                     logginbuilder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
                     logginbuilder.AddConsole();
                     logginbuilder.AddDebug();
                 });
+
+
     }
 }
