@@ -58,6 +58,23 @@ namespace IdentityServerHost.Quickstart.UI
                             new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
                             new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
                         }
+                    },
+                    new TestUser
+                    {
+                        SubjectId = "88421114",
+                        Username = "budi",
+                        Password = "budi",
+                        Claims =
+                        {
+                            new Claim(JwtClaimTypes.Name, "baditabogdan@unibuc.com"),
+                            new Claim(JwtClaimTypes.GivenName, "Bogdan"),
+                            new Claim(JwtClaimTypes.FamilyName, "Badita"),
+                            new Claim(JwtClaimTypes.Email, "Budy"),
+                            new Claim(JwtClaimTypes.PreferredUserName, "BBF"),
+                            new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                            new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
+                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
+                        }
                     }
                 };
             }

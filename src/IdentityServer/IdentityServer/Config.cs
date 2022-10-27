@@ -12,16 +12,16 @@ namespace IdentityServer
         public static IEnumerable<Client> Clients =>
         new Client[]
         {
-            new Client
-            {
-                 ClientId = "tutorialClient",
-                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                 ClientSecrets =
-                 {
-                   new Secret("secret".Sha256())
-                 },
-                 AllowedScopes = { "tutorialAPI" }
-            },
+            //new Client
+            //{
+            //     ClientId = "tutorialClient",
+            //     AllowedGrantTypes = GrantTypes.ClientCredentials,
+            //     ClientSecrets =
+            //     {
+            //       new Secret("secret".Sha256())
+            //     },
+            //     AllowedScopes = { "tutorialAPI" }
+            //},
             new Client
             {
                  ClientId = "cartClient",
@@ -65,6 +65,7 @@ namespace IdentityServer
                            IdentityServerConstants.StandardScopes.Email,
                            "cartAPI"
                            //"roles"
+
                        },
                        AllowAccessTokensViaBrowser = true,
                        RequireConsent = false
@@ -113,7 +114,7 @@ namespace IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
          new ApiScope[]
          {
-             new ApiScope("tutorialAPI", "Tutorial API"),
+           //  new ApiScope("tutorialAPI", "Tutorial API"),
              new ApiScope("cartAPI", "Cart API"),
          };
         public static IEnumerable<ApiResource> ApiResources =>

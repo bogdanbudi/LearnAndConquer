@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Tutorial.Infrastructure.Data;
 using Tutorial.Infrastructure.Repository;
+//using Microsoft.IdentityModel.Tokens;
 
 namespace Tutorial.API
 {
@@ -31,14 +32,29 @@ namespace Tutorial.API
             services.AddScoped<ITutorialContext, TutorialContext>();
             services.AddScoped<ICourseRepository, CourseRepository>();
 
-            services.AddCors(opt =>
-            {
-                opt.AddPolicy("ElearningPolicy", policy =>
-                {
-                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
-                    //policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-                });
-            });
+            //services.AddCors(opt =>
+            //{
+            //    opt.AddPolicy("ElearningPolicy", policy =>
+            //    {
+            //        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+            //        //policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+            //    });
+            //});
+
+           // services.AddAuthentication("Bearer")
+           //.AddJwtBearer("Bearer", options =>
+           //{
+           //    options.Authority = "https://localhost:5005";
+           //    options.TokenValidationParameters = new TokenValidationParameters
+           //    {
+           //        ValidateAudience = false
+           //    };
+           //});
+
+           // services.AddAuthorization(options =>
+           // {
+           //     options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "movieClient", "movies_mvc_client"));
+           // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
