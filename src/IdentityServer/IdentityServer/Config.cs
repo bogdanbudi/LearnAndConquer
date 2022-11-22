@@ -34,7 +34,7 @@ namespace IdentityServer
             },
             new Client
                    {
-                       ClientId = "shopping_web",
+                       ClientId = "angular",
                        ClientName = "Shopping Web",
                        AllowedGrantTypes = GrantTypes.Code,
                        RequirePkce = true,

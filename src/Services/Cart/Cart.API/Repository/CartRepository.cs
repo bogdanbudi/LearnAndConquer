@@ -41,10 +41,20 @@ namespace Cart.API.Repository
 
         public async Task<ShoppingBasket> AddCourseInCart(string userName, ShoppingBasketItem itemToAdd)
         {
+            //var checkCart = await _redisCache.GetStringAsync(userName);
+
+            //if (String.IsNullOrEmpty(checkCart))
+            //    await _redisCache.SetStringAsync(userName, JsonConvert.SerializeObject(new ShoppingBasket(userName)));
+
             var cart = await GetCart(userName);
+            if(String.IsNullOrEmpty(cart.UserName))
+            {
+                cart.UserName = userName;
+            }
+
+
             cart.ShoppingItems.Add(itemToAdd);
             return await UpdateCart(cart);
-
         }
 
         public async Task<bool> RemoveCourse(string userName, string idCourse)
