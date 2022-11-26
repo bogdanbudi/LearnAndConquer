@@ -41,13 +41,13 @@ namespace Cart.API.Repository
 
         public async Task<ShoppingBasket> AddCourseInCart(string userName, ShoppingBasketItem itemToAdd)
         {
-            //var checkCart = await _redisCache.GetStringAsync(userName);
+            var checkCart = await _redisCache.GetStringAsync(userName);
 
-            //if (String.IsNullOrEmpty(checkCart))
-            //    await _redisCache.SetStringAsync(userName, JsonConvert.SerializeObject(new ShoppingBasket(userName)));
+            if (String.IsNullOrEmpty(checkCart))
+                await _redisCache.SetStringAsync(userName, JsonConvert.SerializeObject(new ShoppingBasket(userName)));
 
             var cart = await GetCart(userName);
-            if(String.IsNullOrEmpty(cart.UserName))
+            if(String.IsNullOrEmpty(cart.UserName) || cart == null)
             {
                 cart.UserName = userName;
             }

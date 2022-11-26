@@ -14,7 +14,7 @@ namespace Cart.API.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    [Authorize("ClientIdPolicy")]
+    //[Authorize("ClientIdPolicy")]
     //[Authorize]
     public class CartController : ControllerBase
     {
